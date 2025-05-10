@@ -1,54 +1,64 @@
-# React + TypeScript + Vite
+# Betting App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern betting application built with React, TypeScript, Vite, Redux Toolkit, Firebase (Firestore, Auth, Analytics), and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication (login/logout) with Firebase Auth
+- Sports and events listing with odds
+- Add bets to a cart (bet basket)
+- Place bets: stores bet slips in Firestore and logs analytics events
+- Responsive, modern UI with Tailwind CSS
 
-## Expanding the ESLint configuration
+## Firebase Integration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Firestore**: Bets are stored in the `bets` collection with user ID, bet details, total odds, and timestamp.
+- **Analytics**: Placing a bet logs a `place_bet` event with user and bet info.
+- **Auth**: User authentication is required to place bets.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Development
+
+### Install dependencies
+
+```sh
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+pnpm dev
 ```
+
+### Build for production
+
+```sh
+pnpm build
+```
+
+### Lint and format
+
+```sh
+pnpm lint
+pnpm format
+```
+
+## Environment Variables
+
+Create a `.env` file with your Firebase project credentials:
+
+```
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+```
+
+## Project Structure
+
+- `src/components/CartDrawer.tsx`: Bet basket and bet placement logic
+- `src/firebase.ts`: Firebase config and exports
+- `src/store/`: Redux slices for auth, cart, odds, etc.
+- `src/pages/`: Main app pages
