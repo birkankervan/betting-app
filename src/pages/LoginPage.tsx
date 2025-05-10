@@ -20,6 +20,10 @@ const LoginPage: React.FC = () => {
     formState: { errors },
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: 'user@user.com',
+      password: '123456789',
+    },
     mode: 'onTouched',
   });
 
@@ -44,7 +48,7 @@ const LoginPage: React.FC = () => {
         <div className="flex flex-col items-center mb-6">
           <Trophy size={40} className="mb-2 text-[color:var(--color-primary)]" aria-hidden />
           <h2 className="text-2xl font-bold text-[color:var(--color-primary)] tracking-tight mb-1">
-            Football Login
+            BettApp Login
           </h2>
           <span className="text-sm text-gray-500">Sign in to your account</span>
         </div>
